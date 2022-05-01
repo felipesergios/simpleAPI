@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon src/app.js",
+    "knexmigall": "npx knex migrate:latest && npx knex seed:run",
+    "start": "npm run knexmigall && nodemon src/app.js",
     "swagger-autogen": "node swagger.js"
   },
   "dependencies": {

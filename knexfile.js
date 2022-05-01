@@ -1,3 +1,4 @@
+require("dotenv-safe").config()
 module.exports = {
 
 
