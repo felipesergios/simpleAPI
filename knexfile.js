@@ -4,6 +4,7 @@ module.exports = {
     development: {
         client: 'mysql2',
         connection: {
+          host:     process.env.DATABASE_HOST,
           database: process.env.DATABASE,
           user:     process.env.DATABASE_USER,
           password: process.env.DATABASE_PASSWORD
@@ -41,9 +42,10 @@ module.exports = {
     production: {
       client: 'mysql',
       connection: {
-        database: 'erp',
-        user:     'adonis',
-        password: 'adonis123'
+        host:     process.env.DATABASE_HOST,
+        database: process.env.DATABASE,
+        user:     process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD
       },
       migrations:{
         directory:'./src/database/migrations'

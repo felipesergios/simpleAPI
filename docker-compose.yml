@@ -1,0 +1,28 @@
+version: "2"
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+services:
+    db:
+        image: mariadb
+        environment:
+          MARIADB_ROOT_PASSWORD: mariadb
+          MYSQL_DATABASE: erp
+        restart: unless-stopped
+        networks:
+            - internal
+    app:
+        build: .
+        depends_on:
+          - db
+        command: npm start
+        ports:
+            - "3000:3000"
+        networks:
+            - internal
+            - web
+        volumes:
+            - .:/usr/app
+            - /usr/app/node_modules
