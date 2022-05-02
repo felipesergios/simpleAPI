@@ -2,15 +2,15 @@ const knex = require('../database')
 module.exports={
     async index(req,res){
         const data = await knex('costumers')
-        return res.json(data)
+        return res.status(200).json(data)
     },
     async show(req,res,next){
         const id = req.params.id
         try {
             const data = await knex('costumers').where('id',id)
-            return res.json(data)
+            return res.status(200).json(data)
         } catch (err) {
-            return res.json(err)
+            return res.status(400).json(err)
         }
     },
     async store(req,res){
@@ -22,9 +22,9 @@ module.exports={
                 born_date,
                 phone_number
             }])
-            return res.json(new_costumer)
+            return res.status(201).json(new_costumer)
         } catch (error) {
-            return res.json(error)
+            return res.status(400).json(error)
         }
     },
     async update(req,res){
@@ -35,7 +35,7 @@ module.exports={
             .update({address,phone_number},['address','phone_number'])
             return res.json(update_costumer)
         } catch (error) {
-            return res.json(error)
+            return res.status(400).json(error)
         }
     },
     async delete(req,res){
@@ -44,9 +44,9 @@ module.exports={
             const costumer_for_delete = await knex('costumers')
             .where('id',id)
             .del()
-            return res.json({msg:"deleted"})
+            return res.status(204).json({msg:"deleted"})
         } catch (error) {
-            return res.json(error)
+            return res.status(400).json(error)
         }
     }
 }
